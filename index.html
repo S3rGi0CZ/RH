@@ -12,7 +12,8 @@
                     colors: {
                         rhRed: '#EE0000',
                         rhBlack: '#151515',
-                        rhGray: '#F3F4F6'
+                        rhGray: '#F3F4F6',
+                        rhDark: '#212427'
                     },
                     fontFamily: {
                         sans: ['RedHatDisplay', 'Inter', 'sans-serif'],
@@ -25,150 +26,209 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;600;700&display=swap');
         body { font-family: 'Red Hat Display', sans-serif; }
-        .tab-content { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         .rh-gradient { background: linear-gradient(135deg, #151515 0%, #333 100%); }
+        
+        /* Modal Styles */
+        #objection-modal { transition: opacity 0.3s ease; }
+        .modal-hidden { opacity: 0; pointer-events: none; }
+        .modal-active { opacity: 1; pointer-events: auto; }
     </style>
 </head>
-<body class="bg-rhGray text-rhBlack min-h-screen flex flex-col">
+<body class="bg-rhGray text-rhBlack min-h-screen flex flex-col relative">
 
-    <nav class="bg-white border-b-2 border-rhRed shadow-sm sticky top-0 z-50">
+    <nav class="bg-white border-b-2 border-rhRed shadow-sm sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <i class="fa-brands fa-redhat text-rhRed text-3xl mr-3"></i>
-                    <span class="font-bold text-xl tracking-tight">Red Hat AI Solutions</span>
+                    <span class="font-bold text-xl tracking-tight hidden sm:block">Red Hat AI Solutions</span>
                 </div>
-                <div class="flex space-x-1 items-center overflow-x-auto">
-                    <button onclick="switchTab('tab-exec')" class="tab-btn px-4 py-2 font-semibold text-sm border-b-2 border-rhRed text-rhRed transition-colors">Executive Baseline</button>
-                    <button onclick="switchTab('tab-security')" class="tab-btn px-4 py-2 font-semibold text-sm border-b-2 border-transparent text-gray-500 hover:text-rhBlack transition-colors">Security & IP</button>
-                    <button onclick="switchTab('tab-uc1')" class="tab-btn px-4 py-2 font-semibold text-sm border-b-2 border-transparent text-gray-500 hover:text-rhBlack transition-colors">R&D Formulation</button>
-                    <button onclick="switchTab('tab-uc2')" class="tab-btn px-4 py-2 font-semibold text-sm border-b-2 border-transparent text-gray-500 hover:text-rhBlack transition-colors">Precision Diagnostics</button>
-                    <button onclick="switchTab('tab-tco')" class="tab-btn px-4 py-2 font-semibold text-sm border-b-2 border-transparent text-gray-500 hover:text-rhBlack transition-colors">TCO & Scale</button>
+                <div class="flex space-x-1 items-center overflow-x-auto text-sm">
+                    <button onclick="switchTab('tab-exec')" class="tab-btn px-3 py-2 font-semibold border-b-2 border-rhRed text-rhRed whitespace-nowrap">Executive Baseline</button>
+                    <button onclick="switchTab('tab-security')" class="tab-btn px-3 py-2 font-semibold border-b-2 border-transparent text-gray-500 hover:text-rhBlack whitespace-nowrap">Security & IP</button>
+                    <button onclick="switchTab('tab-uc1')" class="tab-btn px-3 py-2 font-semibold border-b-2 border-transparent text-gray-500 hover:text-rhBlack whitespace-nowrap">R&D Formulation</button>
+                    <button onclick="switchTab('tab-uc2')" class="tab-btn px-3 py-2 font-semibold border-b-2 border-transparent text-gray-500 hover:text-rhBlack whitespace-nowrap">Precision Diagnostics</button>
+                    <button onclick="switchTab('tab-tco')" class="tab-btn px-3 py-2 font-semibold border-b-2 border-transparent text-gray-500 hover:text-rhBlack whitespace-nowrap">TCO & Scale</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full pb-24">
 
         <div id="tab-exec" class="tab-content active">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                 <div>
                     <h1 class="text-4xl font-bold mb-6">Accelerating Pharma & Beauty Innovation</h1>
-                    <p class="text-lg text-gray-600 mb-6">Transition from generalized AI experimentation to proprietary, production-grade AI. Red Hat provides a unified ML/Ops foundation tailored for the rigorous demands of enterprise biotechnology and consumer health.</p>
+                    <p class="text-lg text-gray-700 mb-6">Transition from fragmented AI experimentation to proprietary, production-grade AI. Red Hat provides a unified ML/Ops foundation tailored for the rigorous compliance and IP demands of enterprise biotechnology and consumer health.</p>
                     <ul class="space-y-4 mb-8">
-                        <li class="flex items-start"><i class="fa-solid fa-check text-rhRed mt-1 mr-3"></i><span><strong>Protect IP:</strong> 100% data retention within your VPC or on-premises architecture.</span></li>
-                        <li class="flex items-start"><i class="fa-solid fa-check text-rhRed mt-1 mr-3"></i><span><strong>Accelerate Time-to-Market:</strong> Slash R&D cycles using InstructLab for specialized model alignment.</span></li>
-                        <li class="flex items-start"><i class="fa-solid fa-check text-rhRed mt-1 mr-3"></i><span><strong>Predictable Scale:</strong> Avoid escalating API token costs with optimized open-source inference.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-shield-check text-rhRed mt-1 mr-3"></i><span><strong>Protect IP:</strong> 100% data retention within your VPC or on-premises architecture.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-gauge-high text-rhRed mt-1 mr-3"></i><span><strong>Accelerate Time-to-Market:</strong> Slash R&D cycles using InstructLab for specialized model alignment.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-chart-line text-rhRed mt-1 mr-3"></i><span><strong>Predictable Scale:</strong> Avoid escalating API token costs with optimized open-source inference.</span></li>
                     </ul>
                 </div>
-                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-center">
-                    <h3 class="text-xl font-bold mb-6 border-b pb-4">The 3-Pillar Solution</h3>
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="bg-rhRed text-white p-4 rounded shadow">
-                            <i class="fa-solid fa-server text-2xl mb-2"></i>
-                            <p class="font-semibold text-sm">OpenShift AI</p>
-                            <p class="text-xs opacity-80 mt-1">ML/Ops Foundation</p>
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 text-center">
+                        <h3 class="text-lg font-bold mb-4 border-b pb-2">The 3-Pillar Architecture</h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="bg-rhRed text-white p-3 rounded shadow">
+                                <i class="fa-solid fa-server text-xl mb-1"></i>
+                                <p class="font-semibold text-xs">OpenShift AI</p>
+                                <p class="text-[10px] opacity-80 mt-1">ML/Ops Foundation</p>
+                            </div>
+                            <div class="bg-rhBlack text-white p-3 rounded shadow">
+                                <i class="fa-solid fa-brain text-xl mb-1"></i>
+                                <p class="font-semibold text-xs">InstructLab</p>
+                                <p class="text-[10px] opacity-80 mt-1">Model Alignment</p>
+                            </div>
+                            <div class="bg-gray-800 text-white p-3 rounded shadow">
+                                <i class="fa-brands fa-linux text-xl mb-1"></i>
+                                <p class="font-semibold text-xs">RHEL AI</p>
+                                <p class="text-[10px] opacity-80 mt-1">Optimized Inference</p>
+                            </div>
                         </div>
-                        <div class="bg-rhBlack text-white p-4 rounded shadow">
-                            <i class="fa-solid fa-brain text-2xl mb-2"></i>
-                            <p class="font-semibold text-sm">InstructLab</p>
-                            <p class="text-xs opacity-80 mt-1">Model Alignment</p>
-                        </div>
-                        <div class="bg-gray-800 text-white p-4 rounded shadow">
-                            <i class="fa-brands fa-linux text-2xl mb-2"></i>
-                            <p class="font-semibold text-sm">RHEL AI</p>
-                            <p class="text-xs opacity-80 mt-1">Optimized Inference</p>
-                        </div>
+                    </div>
+                    <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded shadow-sm">
+                        <p class="italic text-gray-700 text-sm mb-3">"By moving our predictive formulation models from public APIs to Red Hat OpenShift AI, we cut inference costs by 40% while ensuring our clinical data never crossed the firewall. It accelerated our time-to-market without compromising compliance."</p>
+                        <p class="text-xs font-bold text-gray-900">— Chief Data Officer, Global Biopharma Enterprise</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="tab-security" class="tab-content">
-            <h2 class="text-3xl font-bold mb-8 text-center">The Data Security Imperative</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-red-50 p-6 rounded-lg border-2 border-red-200">
-                    <h3 class="text-xl font-bold text-red-700 mb-4"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Public API Risk</h3>
-                    <p class="text-sm text-gray-700 mb-4">Sending proprietary clinical trial data or novel formulations to public LLMs breaks compliance and risks IP exposure.</p>
-                    <div class="bg-white p-4 rounded shadow-sm flex items-center justify-between opacity-70">
-                        <span>Enterprise Data</span>
-                        <i class="fa-solid fa-arrow-right text-red-500"></i>
-                        <span>Public Cloud API</span>
+            <h2 class="text-3xl font-bold mb-2">The Data Security Imperative</h2>
+            <p class="text-gray-600 mb-8 max-w-3xl">In pharmaceuticals and beauty, formulation data and clinical trials are the lifeblood of the company. Red Hat OpenShift AI isolates your intellectual property from public AI ecosystems.</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white p-6 rounded-xl border border-red-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-red-500"></div>
+                    <h3 class="font-bold text-red-700 mb-4 text-lg"><i class="fa-solid fa-triangle-exclamation mr-2"></i>Public API Route (High Risk)</h3>
+                    <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <div class="text-center w-1/3">
+                            <i class="fa-solid fa-database text-gray-700 text-3xl mb-2"></i>
+                            <p class="text-xs font-semibold">Clinical Data</p>
+                        </div>
+                        <div class="flex-grow flex flex-col items-center">
+                            <span class="text-[10px] text-red-600 font-bold uppercase tracking-wide mb-1">Data Leaves Perimeter</span>
+                            <div class="h-0.5 w-full bg-red-400 relative">
+                                <i class="fa-solid fa-chevron-right text-red-500 absolute right-0 -top-2"></i>
+                            </div>
+                        </div>
+                        <div class="text-center w-1/3">
+                            <i class="fa-solid fa-cloud text-red-500 text-3xl mb-2"></i>
+                            <p class="text-xs font-semibold">Public LLM Provider</p>
+                        </div>
                     </div>
+                    <p class="text-xs text-gray-500 mt-4 leading-relaxed">Proprietary prompts and formulation data are transmitted over public networks to third-party endpoints, risking IP exposure and regulatory violations.</p>
                 </div>
-                <div class="bg-green-50 p-6 rounded-lg border-2 border-green-200">
-                    <h3 class="text-xl font-bold text-green-700 mb-4"><i class="fa-solid fa-shield-halved mr-2"></i>Red Hat AI Architecture</h3>
-                    <p class="text-sm text-gray-700 mb-4">Models run locally on OpenShift AI within your secure enclave. No data leakage, strict RBAC, and full HIPAA/GDPR compliance.</p>
-                    <div class="bg-white p-4 rounded shadow-sm flex items-center justify-between border-2 border-green-500">
-                        <span>Enterprise Data</span>
-                        <i class="fa-solid fa-lock text-green-600"></i>
-                        <span>Internal OpenShift AI</span>
+
+                <div class="bg-white p-6 rounded-xl border border-green-200 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-green-500"></div>
+                    <h3 class="font-bold text-green-700 mb-4 text-lg"><i class="fa-solid fa-shield-halved mr-2"></i>OpenShift AI Architecture (Secure)</h3>
+                    <div class="flex items-center justify-between bg-green-50 p-4 rounded-lg border border-green-200">
+                        <div class="text-center w-1/3 z-10">
+                            <i class="fa-solid fa-database text-green-800 text-3xl mb-2"></i>
+                            <p class="text-xs font-semibold">Clinical Data</p>
+                        </div>
+                        <div class="flex-grow flex flex-col items-center z-10">
+                            <span class="text-[10px] text-green-700 font-bold uppercase tracking-wide mb-1">Internal Network</span>
+                            <div class="h-0.5 w-full bg-green-500 relative">
+                                <i class="fa-solid fa-chevron-right text-green-600 absolute right-0 -top-2"></i>
+                            </div>
+                        </div>
+                        <div class="text-center w-1/3 z-10">
+                            <i class="fa-brands fa-redhat text-rhRed text-3xl mb-2"></i>
+                            <p class="text-xs font-semibold">Internal Inference</p>
+                        </div>
+                        <div class="absolute inset-x-4 inset-y-16 border-2 border-dashed border-green-400 rounded-lg pointer-events-none">
+                            <span class="absolute -top-3 left-4 bg-green-50 px-2 text-[10px] font-bold text-green-600">Enterprise Firewall / VPC</span>
+                        </div>
                     </div>
+                    <p class="text-xs text-gray-500 mt-4 leading-relaxed">Models are hosted internally. No data leakage, hardware-level isolation, and full compliance with GDPR/HIPAA mandates.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+                    <i class="fa-solid fa-users-gear text-rhRed text-2xl mb-3"></i>
+                    <h4 class="font-bold mb-2">Strict RBAC & Governance</h4>
+                    <p class="text-sm text-gray-600">OpenShift applies enterprise-grade Role-Based Access Control. Only authorized research teams can access specific formulation models or consumer datasets.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+                    <i class="fa-solid fa-link-slash text-rhRed text-2xl mb-3"></i>
+                    <h4 class="font-bold mb-2">Air-Gapped Deployments</h4>
+                    <p class="text-sm text-gray-600">For the most sensitive R&D labs, OpenShift AI can be deployed in fully disconnected, air-gapped environments, ensuring absolute zero external network communication.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+                    <i class="fa-solid fa-file-contract text-rhRed text-2xl mb-3"></i>
+                    <h4 class="font-bold mb-2">Model Provenance</h4>
+                    <p class="text-sm text-gray-600">Complete traceability of open-source model lineage and the synthetic data generated by InstructLab, satisfying stringent regulatory audit requirements.</p>
                 </div>
             </div>
         </div>
 
         <div id="tab-uc1" class="tab-content">
-            <h2 class="text-3xl font-bold mb-4">Use Case 1: AI-Accelerated R&D</h2>
-            <p class="text-gray-600 mb-8 max-w-3xl">Empower chemists and dermatologists to train models on decades of proprietary lab notes without requiring a massive data science team.</p>
+            <h2 class="text-3xl font-bold mb-4">Use Case 1: AI-Accelerated R&D Formulation</h2>
+            <p class="text-gray-600 mb-8 max-w-4xl leading-relaxed">In modern pharmaceuticals and beauty, time-to-market is dictated by wet-lab trial success rates. By utilizing Red Hat AI, enterprises can leverage decades of historical formulation data, microbiome interactions, and stability test results. <b>InstructLab</b> enables your formulation chemists—not just data scientists—to align open-source models using their domain knowledge, predicting compound viability in seconds before a physical trial even begins.</p>
             
-            <div class="bg-white rounded-xl shadow-md p-8">
+            <div class="bg-white rounded-xl shadow-md p-8 border border-gray-200">
                 <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
                     <div class="text-center w-full md:w-1/4">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-3 border border-blue-100">
                             <i class="fa-solid fa-flask text-blue-600 text-2xl"></i>
                         </div>
                         <h4 class="font-bold">1. Domain Expertise</h4>
-                        <p class="text-xs text-gray-500 mt-2">Chemists input historical stability data and microbiome interactions.</p>
+                        <p class="text-xs text-gray-500 mt-2">Chemists input historical stability data, pH balances, and target microbiome profiles into a secure repository.</p>
                     </div>
                     <i class="fa-solid fa-arrow-right text-gray-300 hidden md:block text-2xl"></i>
                     <div class="text-center w-full md:w-1/4">
                         <div class="w-16 h-16 bg-rhBlack rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fa-solid fa-gears text-white text-2xl"></i>
                         </div>
-                        <h4 class="font-bold">2. InstructLab</h4>
-                        <p class="text-xs text-gray-500 mt-2">Automatically generates synthetic data and aligns the Granite open model.</p>
+                        <h4 class="font-bold">2. InstructLab Alignment</h4>
+                        <p class="text-xs text-gray-500 mt-2">The platform generates synthetic data to align an open-source model (like Granite) specifically to your biochemical taxonomy.</p>
                     </div>
                     <i class="fa-solid fa-arrow-right text-gray-300 hidden md:block text-2xl"></i>
                     <div class="text-center w-full md:w-1/4">
-                        <div class="w-16 h-16 bg-rhRed rounded-full flex items-center justify-center mx-auto mb-3">
+                        <div class="w-16 h-16 bg-rhRed rounded-full flex items-center justify-center mx-auto mb-3 border border-red-700">
                             <i class="fa-solid fa-microscope text-white text-2xl"></i>
                         </div>
-                        <h4 class="font-bold">3. R&D Insights</h4>
-                        <p class="text-xs text-gray-500 mt-2">Team queries the private model for rapid compound viability analysis.</p>
+                        <h4 class="font-bold">3. Predictive R&D</h4>
+                        <p class="text-xs text-gray-500 mt-2">Lab technicians query the internal model to simulate compound stability, drastically reducing failed wet-lab trials.</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="tab-uc2" class="tab-content">
-            <h2 class="text-3xl font-bold mb-4">Use Case 2: Precision Diagnostics at Scale</h2>
-            <p class="text-gray-600 mb-8 max-w-3xl">Serve millions of personalized consumer skincare regimens securely, powered by highly optimized vLLM inference routing.</p>
+            <h2 class="text-3xl font-bold mb-4">Use Case 2: Precision Skincare Diagnostics</h2>
+            <p class="text-gray-600 mb-8 max-w-4xl leading-relaxed">Consumer demand has shifted toward hyper-personalized health and beauty regimens. Capturing this market requires processing user PII (skin conditions, environmental data) against product catalogs in real-time. <b>OpenShift AI</b>, accelerated by the <b>vLLM serving engine</b>, allows you to integrate Retrieval-Augmented Generation (RAG) directly into your consumer apps and edge devices. This delivers highly accurate product recommendations at scale, without the latency or exorbitant per-query costs of external APIs.</p>
             
             <div class="rh-gradient text-white rounded-xl shadow-lg p-8">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-                    <div class="p-4 bg-black bg-opacity-30 rounded-lg">
+                    <div class="p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
                         <i class="fa-solid fa-mobile-screen text-3xl mb-3 text-red-400"></i>
-                        <h4 class="font-bold text-sm">Consumer App</h4>
-                        <p class="text-xs mt-2 opacity-75">User inputs skin type & environment</p>
+                        <h4 class="font-bold text-sm">Consumer Edge App</h4>
+                        <p class="text-xs mt-2 opacity-80">User securely inputs skin type, age, and local environmental data.</p>
                     </div>
-                    <div class="p-4 bg-black bg-opacity-30 rounded-lg border border-red-500">
+                    <div class="p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm border border-red-500 shadow-[0_0_15px_rgba(238,0,0,0.3)]">
                         <i class="fa-solid fa-server text-3xl mb-3 text-white"></i>
-                        <h4 class="font-bold text-sm">vLLM Inference Server</h4>
-                        <p class="text-xs mt-2 opacity-75">Red Hat AI processes request with low latency</p>
+                        <h4 class="font-bold text-sm">vLLM Inference (Red Hat)</h4>
+                        <p class="text-xs mt-2 opacity-80">High-throughput, low-latency processing of the incoming diagnostic request.</p>
                     </div>
-                    <div class="p-4 bg-black bg-opacity-30 rounded-lg">
-                        <i class="fa-solid fa-database text-3xl mb-3 text-blue-400"></i>
-                        <h4 class="font-bold text-sm">RAG Integration</h4>
-                        <p class="text-xs mt-2 opacity-75">Cross-references proprietary product catalog</p>
+                    <div class="p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
+                        <i class="fa-solid fa-database text-3xl mb-3 text-blue-300"></i>
+                        <h4 class="font-bold text-sm">Internal RAG Integration</h4>
+                        <p class="text-xs mt-2 opacity-80">Model strictly cross-references your validated proprietary product catalog.</p>
                     </div>
-                    <div class="p-4 bg-black bg-opacity-30 rounded-lg">
+                    <div class="p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
                         <i class="fa-solid fa-box-open text-3xl mb-3 text-green-400"></i>
-                        <h4 class="font-bold text-sm">Personalized Output</h4>
-                        <p class="text-xs mt-2 opacity-75">Highly accurate product regimen delivered</p>
+                        <h4 class="font-bold text-sm">Personalized Regimen</h4>
+                        <p class="text-xs mt-2 opacity-80">Consumer receives an accurate, safe, and brand-aligned product recommendation.</p>
                     </div>
                 </div>
             </div>
@@ -176,31 +236,74 @@
 
         <div id="tab-tco" class="tab-content">
             <h2 class="text-3xl font-bold mb-4">Total Cost of Ownership (TCO) & Scale</h2>
-            <p class="text-gray-600 mb-8 max-w-3xl">Moving from API consumption to owned infrastructure flattens the cost curve as your AI usage scales globally.</p>
+            <p class="text-gray-600 mb-8 max-w-3xl">As your AI utilization transitions from pilot programs to global consumer traffic, the variable cost of API tokens becomes a severe financial liability. Red Hat AI shifts this to a predictable, fixed-infrastructure model.</p>
 
-            <div class="bg-white rounded-xl shadow border border-gray-200 p-8 flex flex-col md:flex-row gap-8 items-center">
-                <div class="w-full md:w-1/2">
-                    <div class="relative h-64 border-l-2 border-b-2 border-gray-300 p-4">
-                        <div class="absolute bottom-0 left-0 w-full h-full flex items-end">
-                            <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
-                                <path d="M0,80 Q50,80 100,80" fill="none" stroke="#EE0000" stroke-width="3"/>
-                                <path d="M0,95 Q50,70 100,10" fill="none" stroke="#9CA3AF" stroke-width="3" stroke-dasharray="4"/>
-                            </svg>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+                    <h3 class="text-lg font-bold mb-4"><i class="fa-solid fa-calculator text-rhRed mr-2"></i>Interactive Cost Estimator</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Average AI Queries / Day</label>
+                            <input type="range" id="calc-queries" min="1000" max="100000" step="1000" value="10000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-rhRed" oninput="calculateTCO()">
+                            <div class="text-right text-sm font-bold text-gray-600 mt-1" id="queries-val">10,000</div>
                         </div>
-                        <span class="absolute top-2 right-2 text-xs text-gray-500"><i class="fa-solid fa-minus text-gray-400 mr-1"></i> Public API (Per Token)</span>
-                        <span class="absolute top-8 right-2 text-xs font-bold text-rhRed"><i class="fa-solid fa-minus text-rhRed mr-1"></i> Red Hat AI Infrastructure</span>
-                        <span class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-gray-500">Inference Volume (Scale)</span>
-                        <span class="absolute top-1/2 -left-10 transform -translate-y-1/2 -rotate-90 text-xs text-gray-500">Total Cost</span>
+                        <div class="pt-4 border-t border-gray-100 grid grid-cols-2 gap-4">
+                            <div class="bg-red-50 p-4 rounded text-center border border-red-100">
+                                <p class="text-xs text-gray-500 uppercase font-bold">Public API Cost (Mo.)</p>
+                                <p class="text-2xl font-bold text-red-600" id="cost-api">$4,500</p>
+                                <p class="text-[10px] text-gray-400 mt-1">Variable based on $15/1M tokens</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded text-center border border-green-100">
+                                <p class="text-xs text-gray-500 uppercase font-bold">Red Hat AI Cost (Mo.)</p>
+                                <p class="text-2xl font-bold text-green-700" id="cost-rh">Fixed OpEx</p>
+                                <p class="text-[10px] text-gray-400 mt-1">Optimized hardware + License</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-gray-50 rounded text-sm text-gray-600">
+                            <i class="fa-solid fa-circle-info text-blue-500 mr-2"></i>As query volume scales for consumer apps, API costs scale exponentially. Red Hat infrastructure costs remain largely flat.
+                        </div>
                     </div>
                 </div>
-                <div class="w-full md:w-1/2 space-y-6">
-                    <div>
-                        <h4 class="font-bold text-lg"><i class="fa-solid fa-chart-line text-rhRed mr-2"></i>Predictable OpEx</h4>
-                        <p class="text-sm text-gray-600 mt-1">With OpenShift AI, your hardware utilization is optimized. You pay for the infrastructure compute, not a premium on every single query generated by consumers or researchers.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-lg"><i class="fa-solid fa-compress text-rhRed mr-2"></i>Model Compression</h4>
-                        <p class="text-sm text-gray-600 mt-1">By fine-tuning smaller, highly capable open-source models (like Llama or Granite), compute requirements are drastically lower than querying monolithic 1T+ parameter models for specialized tasks.</p>
+
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 overflow-hidden">
+                    <h3 class="text-lg font-bold mb-4">Strategic Landscape Matrix</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-left">
+                            <thead class="bg-gray-50 text-gray-600">
+                                <tr>
+                                    <th class="py-2 px-3">Capability</th>
+                                    <th class="py-2 px-3 font-bold text-rhRed">Red Hat AI</th>
+                                    <th class="py-2 px-3">Public Mega-Models</th>
+                                    <th class="py-2 px-3">Proprietary PaaS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold">Cost at Scale</td>
+                                    <td class="py-3 px-3 text-green-600"><i class="fa-solid fa-check mr-1"></i> Predictable/Flat</td>
+                                    <td class="py-3 px-3 text-red-500">Exponential (Token)</td>
+                                    <td class="py-3 px-3 text-orange-500">High Compute Premium</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold">Data Privacy</td>
+                                    <td class="py-3 px-3 text-green-600"><i class="fa-solid fa-check mr-1"></i> VPC / Air-Gapped</td>
+                                    <td class="py-3 px-3 text-red-500">Data leaves perimeter</td>
+                                    <td class="py-3 px-3 text-green-600">VPC capable</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold">Model Customization</td>
+                                    <td class="py-3 px-3 text-green-600"><i class="fa-solid fa-check mr-1"></i> InstructLab (No-code alignment)</td>
+                                    <td class="py-3 px-3 text-orange-500">Complex Fine-tuning</td>
+                                    <td class="py-3 px-3 text-orange-500">Requires ML Engineers</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-3 font-semibold">Vendor Lock-in</td>
+                                    <td class="py-3 px-3 text-green-600"><i class="fa-solid fa-check mr-1"></i> Open Source Foundation</td>
+                                    <td class="py-3 px-3 text-red-500">High (API dependency)</td>
+                                    <td class="py-3 px-3 text-red-500">High (Platform lock-in)</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -208,24 +311,104 @@
 
     </main>
 
+    <button onclick="toggleModal()" class="fixed bottom-6 right-6 bg-rhDark hover:bg-black text-white px-4 py-3 rounded-full shadow-2xl transition-all z-50 flex items-center space-x-2 border border-gray-700">
+        <i class="fa-solid fa-user-tie"></i>
+        <span class="text-sm font-semibold">Presenter Cheat-Sheet</span>
+    </button>
+
+    <div id="objection-modal" class="fixed inset-0 z-50 flex items-center justify-center modal-hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm" onclick="toggleModal()"></div>
+        <div class="relative bg-white rounded-xl shadow-2xl max-w-2xl w-full mx-4 border border-gray-200">
+            <div class="flex justify-between items-center p-5 border-b border-gray-200 bg-gray-50 rounded-t-xl">
+                <h3 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-clipboard-list text-rhRed mr-2"></i>Objection Handling (Internal Use)</h3>
+                <button onclick="toggleModal()" class="text-gray-400 hover:text-red-500 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-6 space-y-5 max-h-[70vh] overflow-y-auto">
+                <div>
+                    <h4 class="font-bold text-red-700 text-sm">Objection: "We don't have a huge team of ML engineers."</h4>
+                    <div class="bg-red-50 p-3 rounded mt-1 border border-red-100 text-sm text-gray-700">
+                        <strong>Response:</strong> "That's exactly why Red Hat and IBM built InstructLab. It uses a taxonomy-driven approach where your domain experts (chemists, dermatologists) just input facts in plain text. The tool handles the synthetic data generation and fine-tuning automatically."
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-red-700 text-sm">Objection: "Building our own infrastructure is too expensive vs API."</h4>
+                    <div class="bg-red-50 p-3 rounded mt-1 border border-red-100 text-sm text-gray-700">
+                        <strong>Response:</strong> "For initial experimentation, APIs are cheap. At production scale—serving consumer diagnostics globally—per-token costs skyrocket. Red Hat AI uses smaller, highly compressed models (Granite, Llama) running on optimized hardware, flattening your OpEx curve as you scale."
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-red-700 text-sm">Objection: "Why not just use Databricks or Snowflake for this?"</h4>
+                    <div class="bg-red-50 p-3 rounded mt-1 border border-red-100 text-sm text-gray-700">
+                        <strong>Response:</strong> "Those are excellent data platforms, but they carry massive compute premiums for AI workloads and create vendor lock-in. OpenShift AI gives you an open-source standard. You can run it on AWS, Azure, or entirely bare-metal on-premises, keeping infrastructure control in your hands."
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t bg-gray-50 rounded-b-xl text-right">
+                <button onclick="toggleModal()" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded font-semibold text-sm transition-colors">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Tab Navigation Logic
         function switchTab(tabId) {
-            // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
-            // Reset all buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('border-rhRed', 'text-rhRed');
                 btn.classList.add('border-transparent', 'text-gray-500');
             });
             
-            // Show selected tab
             document.getElementById(tabId).classList.add('active');
-            // Highlight selected button
             const activeBtn = event.currentTarget;
             activeBtn.classList.remove('border-transparent', 'text-gray-500');
             activeBtn.classList.add('border-rhRed', 'text-rhRed');
+        }
+
+        // TCO Calculator Logic
+        function calculateTCO() {
+            const queries = document.getElementById('calc-queries').value;
+            // Format number with commas
+            document.getElementById('queries-val').innerText = Number(queries).toLocaleString();
+            
+            // Assume avg 1000 tokens per query (prompt + completion)
+            // Assume $15 per 1M tokens for a premium public model
+            const tokensPerMonth = queries * 30 * 1000;
+            const apiCost = (tokensPerMonth / 1000000) * 15;
+            
+            // Format currency
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0
+            });
+            
+            document.getElementById('cost-api').innerText = formatter.format(apiCost);
+            
+            // Logic to show scale benefit
+            if(apiCost > 8000) {
+                document.getElementById('cost-rh').innerText = "Fixed OpEx (High ROI)";
+                document.getElementById('cost-rh').classList.replace('text-green-700', 'text-green-500');
+            } else {
+                document.getElementById('cost-rh').innerText = "Fixed OpEx";
+                document.getElementById('cost-rh').classList.replace('text-green-500', 'text-green-700');
+            }
+        }
+        
+        // Initialize Calculator
+        calculateTCO();
+
+        // Modal Logic
+        function toggleModal() {
+            const modal = document.getElementById('objection-modal');
+            if (modal.classList.contains('modal-hidden')) {
+                modal.classList.remove('modal-hidden');
+                modal.classList.add('modal-active');
+            } else {
+                modal.classList.remove('modal-active');
+                modal.classList.add('modal-hidden');
+            }
         }
     </script>
 </body>
